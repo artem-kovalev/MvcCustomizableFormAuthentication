@@ -1,4 +1,4 @@
-MvcCustomizableUserAuthentication
+MvcCustomizableFormAuthentication
 =================================
 
-Asp.Mvc Customizable User Authentication.
+Asp.Mvc Customizable Form Authentication.
