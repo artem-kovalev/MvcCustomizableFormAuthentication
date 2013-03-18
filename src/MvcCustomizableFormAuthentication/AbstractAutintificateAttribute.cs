@@ -6,17 +6,29 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
+	using MvcCustomizableFormAuthentication.Rule;
+	using System.Security.Principal;
 
     public abstract class AbstractAutintificateAttribute : AuthorizeAttribute
     {
         protected readonly IEnumerable<object> AllowedRole;
+		private readonly ICollection<IRule> _rules = new List<IRule> ();
 
         protected AbstractAutintificateAttribute(IEnumerable<object> allowedRole)
         {
             if (allowedRole == null)
                 throw new ArgumentNullException("allowedRole");
+
             AllowedRole = allowedRole;
         }
+
+		protected void AddRule(IRule rule) 
+		{
+			if (rule == null)
+				throw new ArgumentNullException ("rule");
+
+			_rules.Add (rule);
+		}
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
@@ -26,9 +38,13 @@
             if (httpContext.User == null)
                 return false;
 
-            return AllowedRole.Any() 
-                ? AllowedRole.Any(x => httpContext.User.IsInRole(x.ToString())) 
-                : httpContext.Request.IsAuthenticated;
+			if (AllowedRole.Any () && _rules.Any ()) 
+			{
+				IIdentity user = httpContext.User.Identity;
+				return _rules.Any(rule => rule.Check(user, AllowedRole));
+			}
+
+			return httpContext.Request.IsAuthenticated;
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
