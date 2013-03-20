@@ -45,6 +45,11 @@
     <Compile Include="AbstractAutintificateAttribute.cs" />
     <Compile Include="AbstractIdentity.cs" />
     <Compile Include="Exception\AccountNotSetException.cs" />
+	<Compile Include="Rule\IRule.cs" />
+	<Compile Include="Rule\Rule.cs" />
+	<Compile Include="Rule\RuleFactory.cs" />
+	<Compile Include="Authorize\AbstractAuthorizeService.cs" />
+	<Compile Include="Authorize\IAuthorizeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

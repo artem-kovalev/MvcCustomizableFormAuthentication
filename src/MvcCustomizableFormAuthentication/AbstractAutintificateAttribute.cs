@@ -6,8 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-	using MvcCustomizableFormAuthentication.Rule;
-	using System.Security.Principal;
+	using Rule;
 
     public abstract class AbstractAutintificateAttribute : AuthorizeAttribute
     {
@@ -40,7 +39,7 @@
 
 			if (AllowedRole.Any () && _rules.Any ()) 
 			{
-				IIdentity user = httpContext.User.Identity;
+				var user = httpContext.User.Identity;
 				return _rules.Any(rule => rule.Check(user, AllowedRole));
 			}
 

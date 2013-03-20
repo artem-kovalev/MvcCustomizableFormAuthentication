@@ -1,9 +1,10 @@
-using System;
-using MvcCustomizableFormAuthentication.Rule;
 
-namespace MvcCustomizableFormAuthentication
+namespace MvcCustomizableFormAuthentication.Rule
 {
-	public class RuleFactory<TIdentity, TAccount, TRole>
+    using System;
+    using System.Collections.Generic;
+
+    public class RuleFactory<TIdentity, TAccount, TRole>
 		where TIdentity : AbstractIdentity<TAccount, TRole>
 	{
 		public IRule Create(Func<TIdentity, IEnumerable<TRole>, bool> rule) 

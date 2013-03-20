@@ -2,7 +2,6 @@ namespace MvcCustomizableFormAuthentication.Rule
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Web.Mvc;
 	using System.Linq;
 	using System.Security.Principal;
 
@@ -22,8 +21,8 @@ namespace MvcCustomizableFormAuthentication.Rule
 
 		public bool Check (IIdentity user, IEnumerable<object> allowedRoles)
 		{
-			if (allowedRoles == null) 
-				throw new ArgumentNullException("rules");
+			if (allowedRoles == null)
+                throw new ArgumentNullException("allowedRoles");
 
 
 			IEnumerable<TRole> castAllowedRoles = allowedRoles.Cast<TRole> ();
