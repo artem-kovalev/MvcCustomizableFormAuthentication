@@ -1,7 +1,5 @@
 ﻿namespace MvcCustomizableFormAuthentication.Test.MockObject
 {
-    using MockObject;
-
     public class MockIdentity : AbstractIdentity<MockAccount, Role>
     {
         protected override long GetId(MockAccount account)

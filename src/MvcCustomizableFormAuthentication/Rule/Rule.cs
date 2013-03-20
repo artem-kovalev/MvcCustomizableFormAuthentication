@@ -24,7 +24,6 @@ namespace MvcCustomizableFormAuthentication.Rule
 			if (allowedRoles == null)
                 throw new ArgumentNullException("allowedRoles");
 
-
 			IEnumerable<TRole> castAllowedRoles = allowedRoles.Cast<TRole> ();
 			return _check((TIdentity) user, castAllowedRoles);
 		}

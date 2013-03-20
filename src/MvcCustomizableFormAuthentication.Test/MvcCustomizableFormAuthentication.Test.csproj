@@ -55,6 +55,8 @@
     <Compile Include="MockObject\MockIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MockObject\Role.cs" />
+    <Compile Include="Rule\RuleFactoryTest.cs" />
+    <Compile Include="Rule\RuleTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
