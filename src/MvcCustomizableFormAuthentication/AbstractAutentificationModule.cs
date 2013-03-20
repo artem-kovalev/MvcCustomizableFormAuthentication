@@ -31,7 +31,7 @@
                 return;
             try
             {
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                var ticket = FormsAuthentication.Decrypt(cookie.Value);
                 var identity = AbstractIdentity<TAccount, TRole>.Deserialize<TIdenty>(ticket.UserData);
                 var principal = new GenericPrincipal(identity, identity.Role);
                 context.User = principal;

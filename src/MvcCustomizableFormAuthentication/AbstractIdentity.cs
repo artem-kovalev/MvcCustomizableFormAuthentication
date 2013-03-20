@@ -24,7 +24,8 @@
         {
             get { return String.Format("CustomizeAuthentication_{0}", typeof(TAccount).Name); }
         }
-        public string[] Role { get; set; }
+        public string[] Role { get { return Roles.Cast<string>().ToArray(); } set{} }
+        public TRole[] Roles { get; protected set; }
         public bool IsAuthenticated
         {
             get { return Id != long.MinValue; }
@@ -39,7 +40,7 @@
             Id = GetId(account);
             Name = GetName(account);
 
-            Role = GetRole(account).Select(c => c.ToString()).ToArray();
+            Roles = GetRole(account);
             InitializeMoreFields(account);
             _isInitialized = true;
         }

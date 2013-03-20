@@ -13,12 +13,17 @@
         protected readonly IEnumerable<object> AllowedRole;
 		private readonly ICollection<IRule> _rules = new List<IRule> ();
 
-        protected AbstractAutintificateAttribute(IEnumerable<object> allowedRole)
+       protected AbstractAutintificateAttribute(IEnumerable<object> allowedRole)
         {
             if (allowedRole == null)
                 throw new ArgumentNullException("allowedRole");
 
             AllowedRole = allowedRole;
+        }
+
+        protected AbstractAutintificateAttribute(object[] allowedRole)
+           : this(allowedRole.AsEnumerable())
+        {
         }
 
 		protected void AddRule(IRule rule) 
