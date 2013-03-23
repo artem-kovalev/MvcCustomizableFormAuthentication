@@ -5,6 +5,5 @@
 
     public abstract class ExampleController : AbstractController<ExampleIdentity, Account, Role>
     {
-         
     }
 }

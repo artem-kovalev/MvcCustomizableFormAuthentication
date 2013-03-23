@@ -20,7 +20,7 @@
 
         protected override Role[] GetRole(Account account)
         {
-            return new Role[]{ account.Role };
+            return new []{ account.Role };
         }
 
         /// <summary>

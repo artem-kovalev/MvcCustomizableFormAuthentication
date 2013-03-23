@@ -1,0 +1,42 @@
+﻿@model Example.Controllers.ViewModel.Login
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div>
+    USER ROLE - Login: User; Password: User;
+    <br />
+    ADMIN ROLE - Login: Admin; Password: Admin;
+</div>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Login</legend>
+
+        <div>
+            Login
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+        <div>
+            Password
+        </div>
+        <div>
+            @Html.PasswordFor(model => model.Password)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+

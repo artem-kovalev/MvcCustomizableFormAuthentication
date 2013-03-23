@@ -1,0 +1,14 @@
+﻿@model Example.Infrostructure.ExampleIdentity
+
+@{
+    ViewBag.Title = "UserIndex";
+}
+
+<h2>Hello User: @Html.DisplayTextFor(c => c.Name)</h2>
+<br/>
+<ul>
+    <li>@Html.ActionLink("The page is available to all authorized", "AllIndex")</li>
+    <li>@Html.ActionLink("User page", "UserIndex")</li>
+    <li>@Html.ActionLink("Admin page", "AdminIndex")</li>
+    <li>@Html.ActionLink("Logout", "Logout")</li>
+</ul>
