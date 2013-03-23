@@ -5,7 +5,7 @@
     public class MockAutintificateAttribute : AbstractAutintificateAttribute
     {
         public MockAutintificateAttribute(params Role[] allowedRole) 
-            : base(allowedRole.Select(c=>(object)c))
+            : base(allowedRole.Any())
         {
         }
     }

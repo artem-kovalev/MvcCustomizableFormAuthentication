@@ -22,31 +22,31 @@ namespace MvcCustomizableFormAuthentication.Test.Rule
         [Fact]
         public void CheckRuleTrue()
         {
-            var ruleTrue = _ruleFactory.Create((c, y) => c.Id == 1);
-            Assert.True(ruleTrue.Check(_identity, new List<object>()));
+            var ruleTrue = _ruleFactory.Create(c => c.Id == 1);
+            Assert.True(ruleTrue.Check(_identity));
         }
 
         [Fact]
         public void CheckRuleFalse()
         {
-            var ruleTrue = _ruleFactory.Create((c, y) => c.Id == 100);
-            Assert.False(ruleTrue.Check(_identity, new List<object>()));
+            var ruleTrue = _ruleFactory.Create(c => c.Id == 100);
+            Assert.False(ruleTrue.Check(_identity));
         }
 
         [Fact]
         public void IfArgumentIdentitytOtherTypeThenThrowsInvalidCastException()
         {
             var otherIdenty = new Mock<IIdentity>().Object;
-            var ruleTrue = _ruleFactory.Create((c, y) => c.Id > -1);
-            Assert.Throws<InvalidCastException>(() => ruleTrue.Check(otherIdenty, new List<object>()));
+            var ruleTrue = _ruleFactory.Create(c => c.Id > -1);
+            Assert.Throws<InvalidCastException>(() => ruleTrue.Check(otherIdenty));
 
         }
 
         [Fact]
         public void IfArgumentAllowedRolesNullReferenceThenThrowNullPointerException()
         {
-            var ruleTrue = _ruleFactory.Create((c, y) => c.Id > -1);
-            Assert.Throws<ArgumentNullException>(() => ruleTrue.Check(_identity, null));
+            var ruleTrue = _ruleFactory.Create(c => c.Id > -1);
+            Assert.Throws<ArgumentNullException>(() => ruleTrue.Check(_identity));
         }
 
     }

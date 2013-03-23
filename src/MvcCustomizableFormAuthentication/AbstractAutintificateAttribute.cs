@@ -6,27 +6,20 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-	using Rule;
+    using Rule;
 
     public abstract class AbstractAutintificateAttribute : AuthorizeAttribute
     {
-        protected readonly IEnumerable<object> AllowedRole;
 		private readonly ICollection<IRule> _rules = new List<IRule> ();
 
-       protected AbstractAutintificateAttribute(IEnumerable<object> allowedRole)
-        {
-            if (allowedRole == null)
-                throw new ArgumentNullException("allowedRole");
+        private readonly bool _isNotSimpleAuthentication;
 
-            AllowedRole = allowedRole;
+        protected AbstractAutintificateAttribute(bool isNotSimpleAuthentication)
+        {
+            _isNotSimpleAuthentication = isNotSimpleAuthentication;
         }
 
-        protected AbstractAutintificateAttribute(object[] allowedRole)
-           : this(allowedRole.AsEnumerable())
-        {
-        }
-
-		protected void AddRule(IRule rule) 
+        protected void AddRule(IRule rule) 
 		{
 			if (rule == null)
 				throw new ArgumentNullException ("rule");
@@ -39,17 +32,15 @@
             if (httpContext == null)
                 throw new ArgumentNullException("httpContext");
 
-            if (httpContext.User == null)
+            if (httpContext.User == null || !httpContext.User.Identity.IsAuthenticated)
                 return false;
 
-			if (AllowedRole.Any () && _rules.Any ()) 
-			{
-				var user = httpContext.User.Identity;
-				return _rules.Any(rule => rule.Check(user, AllowedRole));
-			}
-
-			return httpContext.Request.IsAuthenticated;
+            var isAuthorize = false;
+            isAuthorize |= _rules.Any(rule => rule.Check(httpContext.User.Identity));
+            isAuthorize |= httpContext.Request.IsAuthenticated && !_isNotSimpleAuthentication;
+			return isAuthorize;
         }
+
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
